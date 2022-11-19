@@ -17,3 +17,8 @@ runs:
         - name: Sync @types versions
           shell: bash
           run: node $GITHUB_ACTION_PATH/script.mjs
+
+        - name: Install
+          shell: bash
+          run: npm i
+          working-directory: $GITHUB_WORKSPACE
