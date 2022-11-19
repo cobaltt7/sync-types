@@ -12,8 +12,7 @@ runs:
 
         - name: Remove lockfile
           shell: bash
-          run: rm package-lock.json
-          working-directory: ${{ github.action_path }}
+          run: rm $GITHUB_WORKSPACE/package-lock.json
 
         - name: Sync @types versions
           shell: bash
