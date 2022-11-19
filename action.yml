@@ -20,9 +20,3 @@ runs:
           run: npm run build
           shell: bash
           working-directory: ${{ github.action_path }}
-
-        - name: Commit
-          uses: stefanzweifel/git-auto-commit-action@v4.15.4
-          with:
-              commit_message: Update dependencies
-              branch: ${{ github.head_ref }}
