@@ -43,5 +43,5 @@ function transformVersion(version) {
 	if (version.startsWith("<") || ["*", "x", "latest", ""].includes(version)) return version;
 }
 
-await fileSystem.writeFile("./package.json", JSON.stringify(pkg, undefined, unparsed.match(/\s+/)[0] ?? 2), "utf8");
+await fileSystem.writeFile("./package.json", JSON.stringify(pkg, undefined, unparsed.match(/[ \t]+/)[0] ?? 2), "utf8");
 console.log("Completed successfully");
