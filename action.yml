@@ -11,12 +11,10 @@ runs:
               cache: npm
 
         - name: Remove lockfile
+          shell: bash
           run: rm package-lock.json
+          working-directory: ${{ github.action_path }}
 
         - name: Sync @types versions
-          run: node $GITHUB_ACTION_PATH/script.mjs
-
-        - name: Install
-          run: npm run build
           shell: bash
-          working-directory: ${{ github.action_path }}
+          run: node $GITHUB_ACTION_PATH/script.mjs
