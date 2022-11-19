@@ -21,4 +21,4 @@ runs:
         - name: Install
           shell: bash
           run: npm i
-          working-directory: $GITHUB_WORKSPACE
+          working-directory: ${{ github.workspace }}
