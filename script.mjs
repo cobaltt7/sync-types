@@ -1,6 +1,7 @@
 import fileSystem from "node:fs/promises";
 
-const pkg = JSON.parse(await fileSystem.readFile("./package.json", "utf8"));
+const unparsed = await fileSystem.readFile("./package.json", "utf8");
+const pkg = JSON.parse(unparsed);
 
 if (!pkg.devDependencies) {
 	console.log("No dev dependencies found");
@@ -42,5 +43,5 @@ function transformVersion(version) {
 	if (version.startsWith("<") || ["*", "x", "latest", ""].includes(version)) return version;
 }
 
-await fileSystem.writeFile("./package.json", JSON.stringify(pkg, undefined, 2), "utf8");
+await fileSystem.writeFile("./package.json", JSON.stringify(pkg, undefined, unparsed.match(/\s+/)[0] ?? 2), "utf8");
 console.log("Completed successfully");
