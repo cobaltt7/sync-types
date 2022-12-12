@@ -37,10 +37,10 @@ function main(deps) {
 }
 
 console.log("Checking devDependencies...");
-pkg.devDependencies = main(deps);
+pkg.devDependencies = main(pkg.devDependencies);
 
 console.log("\nChecking dependencies...");
-pkg.dependencies = main(deps);
+pkg.dependencies = main(pkg.dependencies);
 
 function transformVersion(version) {
 	if (version.includes("||")) return version.split("||").map(transformVersion).join("||");
