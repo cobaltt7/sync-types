@@ -19,7 +19,7 @@ function main(deps) {
 			let root = dependency.split("/")[1];
 			if (root.includes("__")) root = `@${root.replace("__", "/")}`;
 
-			const rootVersion = pkg.dependencies[root] || pkg.devDependencies[root] || pkg.engines[root];
+			const rootVersion = pkg.dependencies[root] ?? pkg.devDependencies[root] ?? pkg.engines[root];
 			if (rootVersion === undefined) {
 				console.log(`[${dependency}] INGORED - Could not find parent dependency`);
 				return [dependency, version];
