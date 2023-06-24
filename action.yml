@@ -21,7 +21,7 @@ runs:
         - name: Sync @types versions
           shell: bash
           run: |
-              output=$(node $GITHUB_ACTION_PATH/script.mjs)
+              output=$(node $GITHUB_ACTION_PATH/script.mjs --no-warnings=ExperimentalWarning)
               echo "::set-output name=sync::$output"
 
         - name: Install
@@ -32,7 +32,7 @@ runs:
         - name: Find changes
           shell: bash
           run: |
-              output=$(node $GITHUB_ACTION_PATH/getChanges.mjs)
+              output=$(node $GITHUB_ACTION_PATH/getChanges.mjs --no-warnings=ExperimentalWarning)
               echo "::set-output name=changes::$output"
           env:
               GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH
