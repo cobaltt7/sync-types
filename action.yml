@@ -10,6 +10,11 @@ runs:
               node-version: 18.12.1
               cache: npm
 
+        - name: Install
+          shell: bash
+          run: npm i
+          working-directory: $GITHUB_ACTION_PATH
+
         - name: Copy lockfile
           shell: bash
           run: cp $GITHUB_WORKSPACE/package-lock.json $GITHUB_WORKSPACE/package-lock.old.json
@@ -22,7 +27,7 @@ runs:
           shell: bash
           run: |
               output=$(node $GITHUB_ACTION_PATH/script.mjs --no-warnings=ExperimentalWarning)
-              echo "::set-output name=sync::$output"
+              echo "sync=$output" >> $GITHUB_OUTPUT
 
         - name: Install
           shell: bash
@@ -33,7 +38,7 @@ runs:
           shell: bash
           run: |
               output=$(node $GITHUB_ACTION_PATH/getChanges.mjs --no-warnings=ExperimentalWarning)
-              echo "::set-output name=changes::$output"
+              echo "changes=$output" >> $GITHUB_OUTPUT
           env:
               GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH
 
