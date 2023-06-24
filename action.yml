@@ -13,7 +13,7 @@ runs:
         - name: Install
           shell: bash
           run: npm i
-          working-directory: $GITHUB_ACTION_PATH
+          working-directory: ${{ github.action_path }}
 
         - name: Copy lockfile
           shell: bash
@@ -39,8 +39,6 @@ runs:
           run: |
               output=$(node $GITHUB_ACTION_PATH/getChanges.mjs --no-warnings=ExperimentalWarning)
               echo "changes=$output" >> $GITHUB_OUTPUT
-          env:
-              GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH
 
         - name: Remove backup lockfile
           shell: bash
