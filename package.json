@@ -1,0 +1,19 @@
+{
+	"name": "sync-types",
+	"version": "1.2.0",
+	"description": "GitHub action to sync @types dependencies with the normal dependency version.",
+	"main": "action.yml",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RedGuy12/sync-types.git"
+	},
+	"author": "@RedGuy12",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/RedGuy12/sync-types/issues"
+	},
+	"homepage": "https://github.com/RedGuy12/sync-types#readme",
+	"dependencies": {
+		"hosted-git-info": "^6.1.1"
+	}
+}

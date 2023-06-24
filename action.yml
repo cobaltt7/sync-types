@@ -10,15 +10,33 @@ runs:
               node-version: 18.12.1
               cache: npm
 
+        - name: Copy lockfile
+          shell: bash
+          run: cp $GITHUB_WORKSPACE/package-lock.json $GITHUB_WORKSPACE/package-lock.old.json
+
         - name: Remove lockfile
           shell: bash
           run: rm $GITHUB_WORKSPACE/package-lock.json
 
         - name: Sync @types versions
           shell: bash
-          run: node $GITHUB_ACTION_PATH/script.mjs
+          run: |
+              output=$(node $GITHUB_ACTION_PATH/script.mjs)
+              echo "::set-output name=sync::$output"
 
         - name: Install
           shell: bash
           run: npm i
           working-directory: ${{ github.workspace }}
+
+        - name: Find changes
+          shell: bash
+          run: |
+              output=$(node $GITHUB_ACTION_PATH/getChanges.mjs)
+              echo "::set-output name=changes::$output"
+          env:
+              GITHUB_ACTION_PATH: $GITHUB_ACTION_PATH
+
+        - name: Remove backup lockfile
+          shell: bash
+          run: rm $GITHUB_WORKSPACE/package-lock.old.json
