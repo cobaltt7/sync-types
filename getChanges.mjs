@@ -1,7 +1,6 @@
 import hostedGitInfo from "hosted-git-info";
 import fileSystem from "node:fs/promises";
 import path from "node:path";
-import core from "@actions/core";
 
 const rootPath = process.argv.at(-1);
 
@@ -82,9 +81,10 @@ for (const packageName in oldPackages) {
 	}
 }
 
-core.setOutput(
-	"changes",
+fileSystem.writeFile(
+	path.resolve(rootPath, "./output/changes.md"),
 	`<details><summary>Bumped dependencies</summary>${
 		[...changes].join("\n") || "*No packages changed.*"
 	}</details>`,
+	"utf8",
 );

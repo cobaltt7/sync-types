@@ -1,15 +1,15 @@
 import fileSystem from "node:fs/promises";
 import path from "node:path";
-import core from "@actions/core";
 
 const packagePath = path.resolve(process.argv.at(-1), "./package.json");
 const unparsed = await fileSystem.readFile(packagePath, "utf8");
 const pkg = JSON.parse(unparsed);
 
 if (!pkg.devDependencies) {
-	core.setOutput(
-		"sync",
+	fileSystem.writeFile(
+		path.resolve(rootPath, "./output/sync.md"),
 		"<details><summary>Requirement changes</summary>*No dev dependencies found.*</details>",
+		"utf8",
 	);
 	process.exit();
 }
@@ -71,9 +71,10 @@ await fileSystem.writeFile(
 	"utf8",
 );
 
-core.setOutput(
-	"sync",
+fileSystem.writeFile(
+	path.resolve(rootPath, "./output/sync.md"),
 	`<details><summary>Requirement changes</summary>${
 		output.join("\n") || "*No requirements changed.*"
 	}</details>`,
+	"utf8",
 );

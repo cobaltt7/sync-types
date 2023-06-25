@@ -39,3 +39,7 @@ runs:
         - name: Remove backup lockfile
           shell: bash
           run: rm $GITHUB_WORKSPACE/package-lock.old.json
+
+        - name: Set output
+          shell: bash
+          run: echo "outputDir=${{ github.action_path }}/output" >> $GITHUB_OUTPUT
