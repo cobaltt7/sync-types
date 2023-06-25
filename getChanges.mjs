@@ -1,3 +1,4 @@
+// @ts-check
 import hostedGitInfo from "hosted-git-info";
 import fileSystem from "node:fs/promises";
 import path from "node:path";

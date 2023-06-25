@@ -1,7 +1,9 @@
+// @ts-check
 import fileSystem from "node:fs/promises";
 import path from "node:path";
 
-const packagePath = path.resolve(process.argv.at(-1), "./package.json");
+const rootPath = process.argv.at(-1);
+const packagePath = path.resolve(rootPath, "./package.json");
 const unparsed = await fileSystem.readFile(packagePath, "utf8");
 const pkg = JSON.parse(unparsed);
 
