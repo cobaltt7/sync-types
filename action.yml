@@ -1,9 +1,18 @@
 name: sync-types
 author: "@RedGuy12"
 description: GitHub action to sync @types dependencies with the normal dependency version.
+outputs:
+    output-dir:
+        description: "Output log directory"
+        value: ${{ steps.output.outputs.output-dir }}
 runs:
     using: composite
     steps:
+        - name: Set output
+          shell: bash
+          id: output
+          run: echo "output-dir=$GITHUB_ACTION_PATH" >> $GITHUB_OUTPUT
+
         - name: Setup Node.JS
           uses: actions/setup-node@v3.5.1
           with:
@@ -39,7 +48,3 @@ runs:
         - name: Remove backup lockfile
           shell: bash
           run: rm $GITHUB_WORKSPACE/package-lock.old.json
-
-        - name: Set output
-          shell: bash
-          run: echo "outputDir=$GITHUB_ACTION_PATH" >> $GITHUB_OUTPUT
