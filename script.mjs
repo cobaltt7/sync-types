@@ -10,7 +10,7 @@ const pkg = JSON.parse(unparsed);
 if (!pkg.devDependencies) {
 	fileSystem.writeFile(
 		path.resolve(outputPath, "./sync.md"),
-		"<details><summary>Requirement changes</summary>*No dev dependencies found.*</details>",
+		"<details><summary>Requirement changes</summary>\n\n*No dev dependencies found.*\n</details > ",
 		"utf8",
 	);
 	process.exit();
@@ -32,7 +32,7 @@ function main(deps) {
 				pkg.engines[root];
 			if (rootVersion === undefined) {
 				output.push(
-					`**${dependency}**: ignored due to no parent dependency`,
+					`- **${dependency}**: ignored due to no parent dependency`,
 				);
 				return [dependency, version];
 			}
@@ -40,7 +40,7 @@ function main(deps) {
 			const transformed = transformVersion(rootVersion) ?? version;
 			if (version !== transformed) {
 				output.push(
-					`**${dependency}**: requirement changed from \`${version}\` to \`${transformed}\``,
+					`- **${dependency}**: requirement changed from \`${version}\` to \`${transformed}\``,
 				);
 			}
 			return [dependency, transformed];
@@ -75,8 +75,8 @@ await fileSystem.writeFile(
 
 fileSystem.writeFile(
 	path.resolve(outputPath, "./sync.md"),
-	`<details><summary>Requirement changes</summary>${
+	`<details><summary>Requirement changes</summary>\n\n${
 		output.join("\n") || "*No requirements changed.*"
-	}</details>`,
+	}\n</details>`,
 	"utf8",
 );
