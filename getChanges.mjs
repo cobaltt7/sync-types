@@ -1,4 +1,4 @@
-import { fromUrl } from "hosted-git-info";
+import hostedGitInfo from "hosted-git-info";
 import fileSystem from "node:fs/promises";
 import path from "node:path";
 import core from "@actions/core";
@@ -38,10 +38,12 @@ for (const packageName in newPackages) {
 			);
 			const repoLink =
 				repository &&
-				fromUrl(repository.url || repository, {
-					noCommittish: true,
-					noGitPlus: true,
-				}).browse(repository.directory);
+				hostedGitInfo
+					.fromUrl(repository.url || repository, {
+						noCommittish: true,
+						noGitPlus: true,
+					})
+					.browse(repository.directory);
 			const host = repoLink?.split("/")[2];
 			const replacement = {
 				"github.com": ["tree", "commits"],
