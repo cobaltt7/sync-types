@@ -42,4 +42,4 @@ runs:
 
         - name: Set output
           shell: bash
-          run: echo "outputDir=${{ github.action_path }}/output" >> $GITHUB_OUTPUT
+          run: echo "outputDir=${{ github.action_path }}" >> $GITHUB_OUTPUT

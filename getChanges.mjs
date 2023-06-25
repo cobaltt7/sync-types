@@ -83,7 +83,7 @@ for (const packageName in oldPackages) {
 }
 
 fileSystem.writeFile(
-	path.resolve(rootPath, "./output/changes.md"),
+	path.resolve(rootPath, "./changes.md"),
 	`<details><summary>Bumped dependencies</summary>${
 		[...changes].join("\n") || "*No packages changed.*"
 	}</details>`,

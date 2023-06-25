@@ -9,7 +9,7 @@ const pkg = JSON.parse(unparsed);
 
 if (!pkg.devDependencies) {
 	fileSystem.writeFile(
-		path.resolve(rootPath, "./output/sync.md"),
+		path.resolve(rootPath, "./sync.md"),
 		"<details><summary>Requirement changes</summary>*No dev dependencies found.*</details>",
 		"utf8",
 	);
@@ -74,7 +74,7 @@ await fileSystem.writeFile(
 );
 
 fileSystem.writeFile(
-	path.resolve(rootPath, "./output/sync.md"),
+	path.resolve(rootPath, "./sync.md"),
 	`<details><summary>Requirement changes</summary>${
 		output.join("\n") || "*No requirements changed.*"
 	}</details>`,
