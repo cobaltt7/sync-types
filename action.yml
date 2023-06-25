@@ -28,6 +28,7 @@ runs:
           run: |
               output=$(node $GITHUB_ACTION_PATH/script.mjs --no-warnings=ExperimentalWarning)
               echo "sync=$output" >> $GITHUB_OUTPUT
+          working-directory: ${{ github.workspace }}
 
         - name: Install
           shell: bash
@@ -39,6 +40,7 @@ runs:
           run: |
               output=$(node $GITHUB_ACTION_PATH/getChanges.mjs --no-warnings=ExperimentalWarning)
               echo "changes=$output" >> $GITHUB_OUTPUT
+          working-directory: ${{ github.workspace }}
 
         - name: Remove backup lockfile
           shell: bash
