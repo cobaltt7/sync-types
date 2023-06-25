@@ -25,9 +25,7 @@ runs:
 
         - name: Sync @types versions
           shell: bash
-          run: |
-              output=$(node $GITHUB_ACTION_PATH/script.mjs "$GITHUB_WORKSPACE")
-              echo "sync=$output" >> $GITHUB_OUTPUT
+          run: echo "sync=$(node $GITHUB_ACTION_PATH/script.mjs "$GITHUB_WORKSPACE")" >> $GITHUB_OUTPUT
 
         - name: Install
           shell: bash
@@ -36,9 +34,7 @@ runs:
 
         - name: Find changes
           shell: bash
-          run: |
-              output=$(node $GITHUB_ACTION_PATH/getChanges.mjs "$GITHUB_WORKSPACE")
-              echo "changes=$output" >> $GITHUB_OUTPUT
+          run: echo "changes=$(node $GITHUB_ACTION_PATH/getChanges.mjs "$GITHUB_WORKSPACE")" >> $GITHUB_OUTPUT
 
         - name: Remove backup lockfile
           shell: bash
