@@ -22,7 +22,7 @@ const changes = new Set();
 
 for (const packageName in newPackages) {
 	const parsedName =
-		packageName.split("node_modules/").at("-1") ||
+		packageName.split("node_modules/").at(-1) ||
 		newPackages[packageName].name;
 
 	if (oldPackages[packageName]) {
@@ -70,7 +70,7 @@ for (const packageName in newPackages) {
 
 for (const packageName in oldPackages) {
 	const parsedName =
-		packageName.split("node_modules/").at("-1") ||
+		packageName.split("node_modules/").at(-1) ||
 		oldPackages[packageName].name;
 	if (!newPackages[packageName]) {
 		const { version } = oldPackages[packageName];

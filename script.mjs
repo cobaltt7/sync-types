@@ -40,7 +40,6 @@ function main(deps) {
 				output.push(
 					`**${dependency}**: requirement changed from \`${version}\` to \`${transformed}\``,
 				);
-				hasLogged = true;
 			}
 			return [dependency, transformed];
 		}),
