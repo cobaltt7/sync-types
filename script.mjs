@@ -2,7 +2,8 @@ import fileSystem from "node:fs/promises";
 import path from "node:path";
 
 const packagePath = path.resolve(process.argv.at(-1), "./package.json");
-const pkg = JSON.parse(await fileSystem.readFile(packagePath));
+const unparsed = await fileSystem.readFile(packagePath, "utf8");
+const pkg = JSON.parse(unparsed);
 
 if (!pkg.devDependencies) {
 	console.log("No dev dependencies found");

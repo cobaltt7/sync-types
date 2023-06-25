@@ -7,10 +7,14 @@ const rootPath = process.argv.at(-1);
 const oldPackages = JSON.parse(
 	await fileSystem.readFile(
 		path.resolve(rootPath, "./package-lock.old.json"),
+		"utf8",
 	),
 );
 const newPackages = JSON.parse(
-	await fileSystem.readFile(path.resolve(rootPath, "./package-lock.json")),
+	await fileSystem.readFile(
+		path.resolve(rootPath, "./package-lock.json"),
+		"utf8",
+	),
 );
 
 const changes = new Set();
@@ -28,6 +32,7 @@ for (const packageName in newPackages) {
 			const { repository } = JSON.parse(
 				await fileSystem.readFile(
 					path.resolve(rootPath, packageName, "./package.json"),
+					"utf8",
 				),
 			);
 			const repoLink =
