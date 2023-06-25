@@ -15,10 +15,6 @@ runs:
           run: npm i
           working-directory: ${{ github.action_path }}
 
-        - name: Navigate to workspace
-          shell: bash
-          run: cd $GITHUB_WORKSPACE
-
         - name: Copy lockfile
           shell: bash
           run: cp $GITHUB_WORKSPACE/package-lock.json $GITHUB_WORKSPACE/package-lock.old.json
@@ -30,9 +26,8 @@ runs:
         - name: Sync @types versions
           shell: bash
           run: |
-              output=$(node $GITHUB_ACTION_PATH/script.mjs --no-warnings=ExperimentalWarning)
+              output=$(node $GITHUB_ACTION_PATH/script.mjs "$GITHUB_WORKSPACE")
               echo "sync=$output" >> $GITHUB_OUTPUT
-          working-directory: ${{ github.workspace }}
 
         - name: Install
           shell: bash
@@ -42,9 +37,8 @@ runs:
         - name: Find changes
           shell: bash
           run: |
-              output=$(node $GITHUB_ACTION_PATH/getChanges.mjs --no-warnings=ExperimentalWarning)
+              output=$(node $GITHUB_ACTION_PATH/getChanges.mjs "$GITHUB_WORKSPACE")
               echo "changes=$output" >> $GITHUB_OUTPUT
-          working-directory: ${{ github.workspace }}
 
         - name: Remove backup lockfile
           shell: bash

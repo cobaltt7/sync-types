@@ -1,6 +1,6 @@
 {
 	"name": "sync-types",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "GitHub action to sync @types dependencies with the normal dependency version.",
 	"main": "action.yml",
 	"repository": {

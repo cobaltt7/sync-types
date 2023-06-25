@@ -1,6 +1,17 @@
 import { fromUrl } from "hosted-git-info";
-import oldPackages from "./package-lock.old.json" assert { type: "json" };
-import newPackages from "./package-lock.json" assert { type: "json" };
+import fileSystem from "node:fs/promises";
+import path from "node:path";
+
+const rootPath = process.argv.at(-1);
+
+const oldPackages = JSON.parse(
+	await fileSystem.readFile(
+		path.resolve(rootPath, "./package-lock.old.json"),
+	),
+);
+const newPackages = JSON.parse(
+	await fileSystem.readFile(path.resolve(rootPath, "./package-lock.json")),
+);
 
 const changes = new Set();
 
@@ -14,9 +25,10 @@ for (const packageName in newPackages) {
 		const newVersion = newPackages[packageName].version;
 
 		if (oldVersion !== newVersion) {
-			const { repository } = await import(
-				`/${packageName}/package.json`,
-				{ assert: { type: "json" } }
+			const { repository } = JSON.parse(
+				await fileSystem.readFile(
+					path.resolve(rootPath, packageName, "./package.json"),
+				),
 			);
 			const repoLink =
 				repository &&
