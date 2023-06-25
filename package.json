@@ -1,6 +1,6 @@
 {
 	"name": "sync-types",
-	"version": "1.2.7",
+	"version": "1.2.8",
 	"description": "GitHub action to sync @types dependencies with the normal dependency version.",
 	"main": "action.yml",
 	"repository": {
@@ -14,6 +14,7 @@
 	},
 	"homepage": "https://github.com/RedGuy12/sync-types#readme",
 	"dependencies": {
+		"@actions/core": "^1.10.0",
 		"hosted-git-info": "^6.1.1"
 	}
 }

@@ -1,6 +1,7 @@
 import { fromUrl } from "hosted-git-info";
 import fileSystem from "node:fs/promises";
 import path from "node:path";
+import core from "@actions/core";
 
 const rootPath = process.argv.at(-1);
 
@@ -79,4 +80,9 @@ for (const packageName in oldPackages) {
 	}
 }
 
-console.log([...changes].join("\n") || "No packages changed.");
+core.setOutput(
+	"changes",
+	`<details><summary>Bumped dependencies</summary>${
+		[...changes].join("\n") || "*No packages changed.*"
+	}</details>`,
+);

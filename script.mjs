@@ -1,16 +1,20 @@
 import fileSystem from "node:fs/promises";
 import path from "node:path";
+import core from "@actions/core";
 
 const packagePath = path.resolve(process.argv.at(-1), "./package.json");
 const unparsed = await fileSystem.readFile(packagePath, "utf8");
 const pkg = JSON.parse(unparsed);
 
 if (!pkg.devDependencies) {
-	console.log("No dev dependencies found");
+	core.setOutput(
+		"sync",
+		"<details><summary>Requirement changes</summary>*No dev dependencies found.*</details>",
+	);
 	process.exit();
 }
 
-let hasLogged = false;
+const output = [];
 
 function main(deps) {
 	return Object.fromEntries(
@@ -25,7 +29,7 @@ function main(deps) {
 				pkg.devDependencies[root] ??
 				pkg.engines[root];
 			if (rootVersion === undefined) {
-				console.log(
+				output.push(
 					`**${dependency}**: ignored due to no parent dependency`,
 				);
 				return [dependency, version];
@@ -33,7 +37,7 @@ function main(deps) {
 
 			const transformed = transformVersion(rootVersion) ?? version;
 			if (version !== transformed) {
-				console.log(
+				output.push(
 					`**${dependency}**: requirement changed from \`${version}\` to \`${transformed}\``,
 				);
 				hasLogged = true;
@@ -68,4 +72,9 @@ await fileSystem.writeFile(
 	"utf8",
 );
 
-if (!hasLogged) console.log("*No requirements changed.*");
+core.setOutput(
+	"sync",
+	`<details><summary>Requirement changes</summary>${
+		output.join("\n") || "*No requirements changed.*"
+	}</details>`,
+);
