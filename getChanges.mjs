@@ -83,7 +83,7 @@ for (const packageName in oldPackages) {
 
 fileSystem.writeFile(
 	path.resolve(process.argv.at(-2), "./changes.md"),
-	`<details><summary>Bumped dependencies</summary>\n\n${
+	`<details><summary>Changed dependencies</summary>\n\n${
 		[...changes].join("\n") || "*No dependencies bumped.*"
 	}\n</details>`,
 	"utf8",
