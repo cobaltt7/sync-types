@@ -49,7 +49,7 @@ function main(deps) {
 }
 
 pkg.devDependencies = main(pkg.devDependencies);
-pkg.dependencies = main(pkg.dependencies);
+pkg.dependencies = pkg.dependencies && main(pkg.dependencies);
 
 function transformVersion(version) {
 	if (version.includes("||"))
