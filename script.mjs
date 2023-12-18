@@ -27,9 +27,9 @@ function main(deps) {
 			if (root.includes("__")) root = `@${root.replace("__", "/")}`;
 
 			const rootVersion =
-				pkg.dependencies[root] ??
+				pkg.dependencies?.[root] ??
 				pkg.devDependencies[root] ??
-				pkg.engines[root];
+				pkg.engines?.[root];
 			if (rootVersion === undefined) {
 				output.push(
 					`- **${dependency}**: ignored due to no parent dependency`,
