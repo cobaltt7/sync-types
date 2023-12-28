@@ -62,7 +62,7 @@ function transformVersion(version) {
 
 	version = version.trim();
 	version = version.replace(/^(?:>=|[>~^])/, "");
-	if (/^[v\d]/.test(version)) return `<=${version}`;
+	if (/^[v\d]/.test(version)) return `<=${version.split(".").slice(0, 2).join(".")}`;
 	if (version.startsWith("<") || ["*", "x", "latest", ""].includes(version))
 		return version;
 }
