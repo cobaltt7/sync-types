@@ -46,6 +46,10 @@ runs:
           run: node $GITHUB_ACTION_PATH/getChanges.mjs "$GITHUB_ACTION_PATH" "$GITHUB_WORKSPACE"
           continue-on-error: true
 
+        - name: Emit output file
+          shell: bash
+          run: echo "$(cat $GITHUB_ACTION_PATH/changes.md)$(cat $GITHUB_ACTION_PATH/sync.md)" > $GITHUB_ACTION_PATH/output.md
+
         - name: Remove backup lockfile
           shell: bash
           run: rm $GITHUB_WORKSPACE/package-lock.old.json
