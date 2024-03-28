@@ -14,9 +14,9 @@ runs:
           run: echo "output-dir=$GITHUB_ACTION_PATH" >> $GITHUB_OUTPUT
 
         - name: Setup Node.JS
-          uses: actions/setup-node@v3.5.1
+          uses: actions/setup-node@v4.0.2
           with:
-              node-version: 18.12.1
+              node-version: 20.6.0
               cache: npm
 
         - name: Install
